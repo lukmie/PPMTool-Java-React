@@ -1,4 +1,4 @@
-package com.lukmie.ppmtool.domain;
+package com.lukmie.ppmtool.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

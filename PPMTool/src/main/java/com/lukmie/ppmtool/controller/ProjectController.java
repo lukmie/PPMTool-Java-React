@@ -1,17 +1,13 @@
 package com.lukmie.ppmtool.controller;
 
-import com.lukmie.ppmtool.domain.Project;
-import com.lukmie.ppmtool.exception.ProjectIdException;
+import com.lukmie.ppmtool.entity.Project;
 import com.lukmie.ppmtool.service.MapValidationErrorService;
 import com.lukmie.ppmtool.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Objects;
@@ -32,6 +28,12 @@ public class ProjectController {
 
         Project project1 = projectService.saveProject(project);
         return new ResponseEntity<>(project1, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{projectIdentifier}")
+    public ResponseEntity<?> findProjectByProjectIdentifier(@PathVariable String projectIdentifier) {
+        Project project = projectService.findProjectByProjectIdentifier(projectIdentifier);
+        return new ResponseEntity<>(project, HttpStatus.OK);
     }
 
 }
