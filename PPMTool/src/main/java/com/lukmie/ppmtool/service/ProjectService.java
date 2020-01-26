@@ -6,8 +6,6 @@ import com.lukmie.ppmtool.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-
 @RequiredArgsConstructor
 @Service
 public class ProjectService {
@@ -24,10 +22,7 @@ public class ProjectService {
     }
 
     public Project findProjectByProjectIdentifier(String projectIdentifier) {
-        Project project = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
-        if (!Objects.nonNull(project)) {
-            throw new ProjectIdException("Project ID " + projectIdentifier + " does not exist.");
-        }
-        return project;
+        return projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase())
+                .orElseThrow(() -> new ProjectIdException("Project ID " + projectIdentifier + " does not exist."));
     }
 }
