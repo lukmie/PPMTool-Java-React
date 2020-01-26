@@ -1,6 +1,7 @@
 package com.lukmie.ppmtool.controller;
 
 import com.lukmie.ppmtool.domain.Project;
+import com.lukmie.ppmtool.exception.ProjectIdException;
 import com.lukmie.ppmtool.service.MapValidationErrorService;
 import com.lukmie.ppmtool.service.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +30,8 @@ public class ProjectController {
         ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationService(result);
         if (Objects.nonNull(errorMap)) return errorMap;
 
-        projectService.saveProject(project);
-        return new ResponseEntity<>(project, HttpStatus.CREATED);
+        Project project1 = projectService.saveProject(project);
+        return new ResponseEntity<>(project1, HttpStatus.CREATED);
     }
 
 }
